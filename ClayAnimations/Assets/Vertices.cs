@@ -10,9 +10,10 @@ public class Vertices : MonoBehaviour
     public void PaintRaise(Vector3 center, float radius, float power)
     {
         Vector3 localPoint = transform.InverseTransformPoint(center);
-        Mesh mesh = this.gameObject.GetComponent<MeshFilter>().mesh;
+        Mesh mesh = GetComponent<MeshFilter>().mesh;
         List<Vector3> verts = new List<Vector3>();
         mesh.GetVertices(verts);
+
 
         for (int i = 0; i < verts.Count; ++i)
         {
