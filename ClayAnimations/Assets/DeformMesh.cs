@@ -5,31 +5,30 @@ using UnityEngine;
 public class DeformMesh : MonoBehaviour
 {
 
-    Vector3[] original_vertex_positions;
-    Vector3[] vertex_positions;
-
-    Transform[] bone_collection;
-    void Awake()
+    private void Start()
     {
-        original_vertex_positions = gameObject.GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh.vertices;
-        bone_collection = gameObject.GetComponentInChildren<SkinnedMeshRenderer>().bones;
-    }
-
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.D))
-        {
-            Debug.Log(bone_collection[0]);
-        }
         
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            ResetVertices();
-        }
     }
 
-    void ResetVertices()
+
+    [ExecuteInEditMode]
+
+
+    private void OnDrawGizmos()
     {
-        vertex_positions = original_vertex_positions;
+        Gizmos.color = Color.blue;
+        foreach (Transform Bone in gameObject.GetComponentInChildren<SkinnedMeshRenderer>().bones)
+        {
+            if (Bone.parent != gameObject.GetComponentInChildren<SkinnedMeshRenderer>().bones[0])
+            {
+                Gizmos.DrawLine(Bone.position, Bone.parent.position);
+                Gizmos.DrawLine(Bone.parent.position, Bone.position);
+            }
+            else
+            {
+                Gizmos.DrawLine(Bone.GetChild(0).position, Bone.position);
+                Gizmos.DrawLine(Bone.position, Bone.GetChild(0).position);
+            }
+        }
     }
-}
+    }
