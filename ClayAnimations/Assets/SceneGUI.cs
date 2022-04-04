@@ -88,7 +88,7 @@ public class SceneGUI : MonoBehaviour
             return;
         }
 
-        bone_collection[selected_bone].position = new Vector3(bone_collection[selected_bone].position.x, bone_collection[selected_bone].position.y + 10, bone_collection[selected_bone].position.z);
-        deform.AddDeformingForce();
+        //bone_collection[selected_bone].localScale = new Vector3(bone_collection[selected_bone].localScale.x, bone_collection[selected_bone].localScale.y + 1, bone_collection[selected_bone].localScale.z);
+        deform.AddDeformingForce(bone_collection[selected_bone], 2);
     }
 }

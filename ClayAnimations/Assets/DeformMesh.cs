@@ -5,43 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter))]
 public class DeformMesh : MonoBehaviour
 {
-    Mesh deformingMesh;
-    Vector3[] originalVerts, displacedVerts;
-    Vector3[] vertexVelocities;
+    [SerializeField]SkinnedMeshRenderer deformingMesh;
 
-    //[SerializeField] float force = 10f;
-
-    private void Start()
+    public void AddDeformingForce(Transform bone, float scale)
     {
-        deformingMesh = GetComponent<MeshFilter>().mesh;
-        originalVerts = deformingMesh.vertices;
-        displacedVerts = new Vector3[originalVerts.Length];
 
-        for (int i = 0; i < originalVerts.Length; i++)
-        {
-            displacedVerts[i] = originalVerts[i];
-        }
-
-        vertexVelocities = new Vector3[originalVerts.Length];
+        /// get bone position (both ends and middle)
+        /// increase width/2 of ends points
+        /// decrease width in middle
     }
-
-    public void AddDeformingForce()
-    {
-        for (int i = 0; i < displacedVerts.Length; i++)
-        {
-            UpdateVerts(i);
-        }
-        deformingMesh.vertices = displacedVerts;
-        deformingMesh.RecalculateNormals();
-        //take area based on weight painting? (Unless moving bones scales bones earlier in chain)
-    }
-
-    void UpdateVerts(int i)
-    {
-        Vector3 velocity = vertexVelocities[i];
-        displacedVerts[i] += velocity * Time.deltaTime;
-    }
-
 
     [ExecuteInEditMode]
     private void OnDrawGizmos()
