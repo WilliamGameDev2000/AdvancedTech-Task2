@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Select : MonoBehaviour
 {
-    bool selected = false;
+    [SerializeField]
+    private bool selected = false;
 
-    private void OnMouseDown()
+    public void SetSelected(bool set)
     {
-       selected = true;
-        Debug.Log("Selected:" + gameObject.name);
+        selected = set;
+    }
+
+    public bool GetSelected()
+    {
+        return selected;
     }
 }
